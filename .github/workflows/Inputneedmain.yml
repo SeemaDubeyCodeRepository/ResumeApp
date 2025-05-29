@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       username:
-        description: 'Enter your name'
+        description: 'Enter your age'
         required: true
 
 jobs:
   first:
     runs-on: ubuntu-latest
     outputs:
-      uname: ${{ steps.set-name.outputs.name }}
+      uage: ${{ steps.set-age.outputs.age }}
     steps:
-      - id: set-name
-        run: echo "name=${{ github.event.inputs.username }}" >> $GITHUB_OUTPUT
+      - id: set-age
+        run: echo "age=${{ github.event.inputs.age }}" >> $GITHUB_OUTPUT
 
   second:
     needs: first
     runs-on: ubuntu-latest
     steps:
       - name: Greet User
-        run: echo "Hello, ${{ needs.first.outputs.uname }}!"
+        run: echo "Hello, ${{ needs.first.outputs.uage }}!"
