@@ -1,0 +1,23 @@
+name: Shell Commands Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-shell-commands:
+    name: Run Shell Commands
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run some shell commands
+        run: |
+          echo "Hello from GitHub Actions!"
+          echo "Current directory:"
+          pwd
+          echo "List files:"
+          ls -al
