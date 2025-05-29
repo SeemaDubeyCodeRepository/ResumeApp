@@ -1,0 +1,24 @@
+name: Simple Input + Needs
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: 'Enter your name'
+        required: true
+
+jobs:
+  first:
+    runs-on: ubuntu-latest
+    outputs:
+      uname: ${{ steps.set-name.outputs.name }}
+    steps:
+      - id: set-name
+        run: echo "name=${{ github.event.inputs.username }}" >> $GITHUB_OUTPUT
+
+  second:
+    needs: first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet User
+        run: echo "Hello, ${{ needs.first.outputs.uname }}!"
